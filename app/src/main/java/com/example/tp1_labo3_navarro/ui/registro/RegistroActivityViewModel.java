@@ -18,6 +18,8 @@ public class RegistroActivityViewModel extends AndroidViewModel {
     private Context context;
     private ApiClient apiClient;
 
+    private RegistroActivity ra;
+
     private MutableLiveData<Usuario> usuarioM;
     public RegistroActivityViewModel(@NonNull Application application) {
         super(application);
@@ -45,12 +47,10 @@ public class RegistroActivityViewModel extends AndroidViewModel {
         context.startActivity(intent);
     }
 
-    public void leerUsuario(Usuario usuario){
+    public void leerUsuario(){
 
-       usuarioM.setValue(usuario);
-
-
-
+        Usuario usuario = apiClient.leer(context);
+        usuarioM.setValue(usuario);
     }
 
 }

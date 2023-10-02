@@ -13,6 +13,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.tp1_labo3_navarro.Modelo.Usuario;
 import com.example.tp1_labo3_navarro.request.ApiClient;
 import com.example.tp1_labo3_navarro.ui.registro.RegistroActivity;
+import com.example.tp1_labo3_navarro.ui.registro.RegistroActivityViewModel;
 
 public class MainActivityViewModel extends AndroidViewModel {
     private Context context;
@@ -38,13 +39,12 @@ public class MainActivityViewModel extends AndroidViewModel {
     public void loginUsuario(String mail , String clave ){
         Usuario usuario = ApiClient.login(context,mail,clave);
         if(usuario !=null){
-            Intent intent = new Intent(context, RegistroActivity.class);
-            intent.putExtra("usuario",usuario);
-            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            context.startActivity(intent);
+          usuarioM.setValue(usuario);
         }
         else {
             Toast.makeText(context,"Ingrese valores correctos",Toast.LENGTH_LONG).show();
         }
+
+
     }
 }

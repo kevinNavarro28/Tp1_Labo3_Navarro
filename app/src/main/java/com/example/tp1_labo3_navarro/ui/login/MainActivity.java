@@ -25,6 +25,17 @@ public class MainActivity extends AppCompatActivity {
         setContentView(binding.getRoot());
         mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainActivityViewModel.class);
 
+        mv.getUsuarioM().observe(this, new Observer<Usuario>() {
+            @Override
+            public void onChanged(Usuario usuario) {
+                Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
+                //putExtra("usuario", usuario)
+                intent.putExtra("usuario", usuario);
+                startActivity(intent);
+                finish();
+            }
+        });
+
 
         binding.BtLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,7 +49,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });

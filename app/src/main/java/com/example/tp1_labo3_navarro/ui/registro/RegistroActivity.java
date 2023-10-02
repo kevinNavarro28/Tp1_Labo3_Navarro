@@ -30,8 +30,6 @@ public class RegistroActivity extends AppCompatActivity {
         binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(RegistroActivityViewModel.class);
-        main = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(MainActivityViewModel.class);
-
 
 
 
@@ -42,12 +40,22 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
 
-        Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-        binding.EtNombre.setText(usuario.getNombre());
-        binding.EtApellido.setText(usuario.getApellido());
-        binding.EtDni.setText(String.valueOf(usuario.getDni()));
-        binding.EtMail.setText(usuario.getMail());
-        binding.Etclave.setText(usuario.getClave());
+
+        mv.getUsuarioM().observe(this, new Observer<Usuario>() {
+            @Override
+            public void onChanged(Usuario usuario) {
+                binding.EtNombre.setText(usuario.getNombre());
+                binding.EtApellido.setText(usuario.getApellido());
+                binding.EtDni.setText(String.valueOf(usuario.getDni()));
+                binding.EtMail.setText(usuario.getMail());
+                binding.Etclave.setText(usuario.getClave());
+
+            }
+        });
+        mv.leerUsuario();
+
+
+
 
 
 

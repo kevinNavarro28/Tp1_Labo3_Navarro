@@ -40,6 +40,9 @@ public class MainActivityViewModel extends AndroidViewModel {
         Usuario usuario = ApiClient.login(context,mail,clave);
         if(usuario !=null){
           usuarioM.setValue(usuario);
+            Intent intent = new Intent(context, RegistroActivity.class);
+            intent.putExtra("usuario", usuario);
+            context.startActivity(intent);
         }
         else {
             Toast.makeText(context,"Ingrese valores correctos",Toast.LENGTH_LONG).show();

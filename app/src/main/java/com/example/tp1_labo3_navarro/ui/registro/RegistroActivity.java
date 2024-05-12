@@ -30,7 +30,25 @@ public class RegistroActivity extends AppCompatActivity {
         binding = ActivityRegistroBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         mv = ViewModelProvider.AndroidViewModelFactory.getInstance(getApplication()).create(RegistroActivityViewModel.class);
+       /*boolean formularioVacio= getIntent().getBooleanExtra("formulario_vacio",false);
+        if(formularioVacio){
+            binding.EtNombre.setText("");
+            binding.EtApellido.setText("");
+            binding.EtDni.setText("");
+            binding.EtMail.setText("");
+            binding.Etclave.setText("");
+        }
+        else{
+            Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
+            if(usuario!=null){
+                binding.EtNombre.setText(usuario.getNombre());
+                binding.EtApellido.setText(usuario.getApellido());
+                binding.EtDni.setText(String.valueOf(usuario.getDni()));
+                binding.EtMail.setText(usuario.getMail());
+                binding.Etclave.setText(usuario.getClave());
+            }
 
+        }*/
 
 
         binding.BtRegistro.setOnClickListener(new View.OnClickListener() {
@@ -39,16 +57,30 @@ public class RegistroActivity extends AppCompatActivity {
                 mv.registrarUsuario(binding.EtNombre.getText().toString(),binding.EtApellido.getText().toString(),binding.EtDni.getText().toString(),binding.EtMail.getText().toString(),binding.Etclave.getText().toString());
             }
         });
-
+        Usuario usuario = (Usuario) getIntent().getSerializableExtra("usuario");
 
         mv.getUsuarioM().observe(this, new Observer<Usuario>() {
             @Override
             public void onChanged(Usuario usuario) {
+                boolean formularioVacio= getIntent().getBooleanExtra("formulario_vacio",false);
+            if(formularioVacio){
+             binding.EtNombre.setText("");
+             binding.EtApellido.setText("");
+             binding.EtDni.setText("");
+             binding.EtMail.setText("");
+             binding.Etclave.setText("");
+        }
+            else{
+
+             if(usuario!=null){
                 binding.EtNombre.setText(usuario.getNombre());
                 binding.EtApellido.setText(usuario.getApellido());
                 binding.EtDni.setText(String.valueOf(usuario.getDni()));
                 binding.EtMail.setText(usuario.getMail());
                 binding.Etclave.setText(usuario.getClave());
+            }
+
+        }
 
             }
         });

@@ -29,10 +29,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChanged(Usuario usuario) {
                 Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
-                //putExtra("usuario", usuario)
-                intent.putExtra("usuario", usuario);
+                intent.putExtra("formulario_vacio",false);
                 startActivity(intent);
-                finish();
             }
         });
 
@@ -49,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, RegistroActivity.class);
+                intent.putExtra("formulario_vacio",true);
                 startActivity(intent);
             }
         });
